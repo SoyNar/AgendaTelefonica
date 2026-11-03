@@ -77,7 +77,7 @@ public class Contacto {
         }
     //metodo validar si telefono es valido
     public static boolean esTelefonoValido(String telefono){
-        String reglaTel = "(\\+\\d{1,2} )?(\\d{9}|\\d{3} \\d{3} \\d{3})";
+        String reglaTel = "(\\+\\d{1,2} ?)?(\\d{9}|\\d{3} \\d{3} \\d{3})";
 
 
         if(telefono ==null){
