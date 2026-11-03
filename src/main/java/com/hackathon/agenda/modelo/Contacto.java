@@ -1,5 +1,7 @@
 package com.hackathon.agenda.modelo;
 
+import java.util.Objects;
+
 public class Contacto {
     private String nombre;
     private String apellido;
@@ -83,8 +85,30 @@ public class Contacto {
         return telefono.matches(reglaTel);
     }
 
+    //sobreescritura de metodos para validar si un contacto es igual
+    @Override
+    public boolean equals(Object contacto){ //antes del punto del metodo nombre, apellido, telefono vinenen del constructor
+        if(!(contacto instanceof Contacto)){
+            return false;
+        }
+        Contacto c = (Contacto)contacto; //parametro pasado al metodo
 
+        if(c==null){
+            return false;
+        }
+        boolean validacionNombre= nombre.equalsIgnoreCase(c.nombre);
+        boolean validacionApellido =apellido.equalsIgnoreCase(c.apellido);
+        if(validacionNombre&&validacionApellido==true){
+            return true;
+        }else {
+            return false;
+        }
+    }
 
+    @Override
+    public int hashCode(){
+        return Objects.hash(nombre.toLowerCase(), apellido.toLowerCase());
+    }
 
 
 }
