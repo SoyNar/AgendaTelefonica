@@ -14,6 +14,10 @@ public class Contacto {
             throw new IllegalArgumentException("El Apellido no es válido");
 
         }
+        if (esTelefonoValido(telefono)!=true){
+            throw new IllegalArgumentException("El Telefono no es válido");
+
+        }
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
@@ -52,11 +56,15 @@ public class Contacto {
     }
 
     public void setTelefono(String telefono) {
-        this.telefono = telefono;
+        if(esTelefonoValido(telefono)==false){
+            throw new IllegalArgumentException("El télefono no es válido");
+        }else {
+            this.telefono = telefono;
+        }
     }
 
     //metodo para validar si nombre y apellido son valios
-    public boolean esDatoValido(String dato){
+    public static boolean esDatoValido(String dato){
         if(dato==null){
            return false;
         }else if(dato.isBlank()==true){
@@ -64,6 +72,20 @@ public class Contacto {
         } else{
             return true;
         }
+        }
+    //metodo validar si telefono es valido
+    public static boolean esTelefonoValido(String telefono){
+        String reglaTel= "\\d{9}";
+
+        if(telefono ==null){
+            return false;
+        }
+        return telefono.matches(reglaTel);
     }
 
+
+
+
+
 }
+
