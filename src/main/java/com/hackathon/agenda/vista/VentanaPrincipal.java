@@ -43,10 +43,10 @@ public class VentanaPrincipal extends JFrame {
         panelCampos.add(txtTelefono);
 
         JPanel panelBotones = new JPanel();
-        btnAgregar = ComponentesGraficos.crearBotonPrincipal("Guardar");
-        btnBuscar = ComponentesGraficos.crearBotonPrincipal("Buscar");
-        btnModificar = ComponentesGraficos.crearBotonPrincipal("Modificar");
-        btnEliminar = ComponentesGraficos.crearBotonPeligro("Eliminar");
+        btnAgregar = ComponentesGraficos.creatBoton("Guardar");
+        btnBuscar = ComponentesGraficos.creatBoton("Buscar");
+        btnModificar = ComponentesGraficos.creatBoton("Modificar");
+        btnEliminar = ComponentesGraficos.creatBotonPeligro("Eliminar");
         panelBotones.add(btnAgregar);
         panelBotones.add(btnModificar);
         panelBotones.add(btnEliminar);
