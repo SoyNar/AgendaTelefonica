@@ -73,72 +73,44 @@ public class VistaPrueba extends JFrame {
 
     }
 
-    public void incializarComponente(){
+    private void incializarComponente() {
+        name = ComponentesGraficos.crearCampoTexto(15, "Ej: Carlos");
+        lastname = ComponentesGraficos.crearCampoTexto(15, "Ej: García");
+        phone = ComponentesGraficos.crearCampoTexto(15, "Ej: 600 000 000");
 
-        //crear cont3enedor
+        JPanel filaForm = ComponentesGraficos.creaFilaCampos(
+                ComponentesGraficos.crearComponenteFila("Nombre", name),
+                ComponentesGraficos.crearComponenteFila("Apellido", lastname),
+                ComponentesGraficos.crearComponenteFila("Teléfono", phone));
+
+        btnGuardar = ComponentesGraficos.creatBotonPrimario("Guardar");
+        btnEditar = ComponentesGraficos.creatBoton("Editar");
+        btnEliminar = ComponentesGraficos.creatBotonPeligro("Eliminar");
+        btnBuscar = ComponentesGraficos.creatBoton("Buscar");
+        btnLimpiar = ComponentesGraficos.creatBoton("Limpiar");
+
+        modeloTabla = ComponentesGraficos.crearModeloTabla("Nombre", "Apellido", "Teléfono");
+        tablaContactos = ComponentesGraficos.crearTabla(modeloTabla);
+        JScrollPane scrollTabla = new JScrollPane(tablaContactos);
+        scrollTabla.setBorder(BorderFactory.createEmptyBorder(0, 50, 20, 50));
+
+        lblEstado = ComponentesGraficos.crearEtiquetaEstado();
+        lblEstado.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JPanel panelBotones = ComponentesGraficos.crearPanelBotones(
+                btnGuardar, btnEditar, btnEliminar, btnBuscar, btnLimpiar);
+
         JPanel contenedor = new JPanel();
         contenedor.setLayout(new BoxLayout(contenedor, BoxLayout.Y_AXIS));
-        contenedor.setBorder(BorderFactory.createEmptyBorder(30,30,30,30));
-        name = ComponentesGraficos.crearCampoTexto(15, "Ej: Carlos");
-        lastname = ComponentesGraficos.crearCampoTexto(15,"Cabrito");
-        phone = ComponentesGraficos.crearCampoTexto(15,"36351651651");
-        JPanel colNombre = ComponentesGraficos.crearComponenteFila("nombre", name);
-        JPanel colLastname  = ComponentesGraficos.crearComponenteFila("Apellido", lastname);
-        JPanel colphone  = ComponentesGraficos.crearComponenteFila("Telefono",phone );
-
-        //foila horizontal
-        JPanel filaForm = ComponentesGraficos.creaFilaCampos(colNombre,colLastname,colphone);
-
-        //botones
-        btnGuardar = ComponentesGraficos.creatBotonPrimario("Guardar");
-        btnEditar= ComponentesGraficos.creatBoton("Editar");
-        btnEliminar  = ComponentesGraficos.creatBotonPeligro("Eliminar");
-       btnBuscar  = ComponentesGraficos.creatBoton("Buscar");
-       btnLimpiar = ComponentesGraficos.creatBoton("limipiar");
-
-        //tabla
-        modeloTabla = ComponentesGraficos.crearModeloTabla("Nombre","Apellido","Telefono");
-        tablaContactos = ComponentesGraficos.crearTabla(modeloTabla);
-
-        //envover tabla en un JSCrollPane
-        JScrollPane scrollTabla = new JScrollPane(tablaContactos);
-
-        //margen
-        scrollTabla.setBorder(BorderFactory.createEmptyBorder(0,50,20,50));
-//        ComponentesGraficos.mostrarEstadoCargaTabla(tablaContactos,true);
-
-//        Timer t =  new Timer(2500, e->{
-//            tablaContactos.setDefaultRenderer(Object.class, new javax.swing.table.DefaultTableCellRenderer());
-//            DefaultTableModel modelo = (DefaultTableModel) tablaContactos.getModel();
-//            modelo.setRowCount(0);
-//
-//            modelo.addRow(new Object[] {"CArlos", "Mena", "30012345896"});
-//            modelo.addRow(new Object[] {"Ana", "Ramos", "56616516516"});
-//
-            tablaContactos.setEnabled(true);
-//
-//        });
-//        t.setRepeats(false);
-//        t.start();
-        lblEstado = new JLabel("Mostrando info del sistema....." , SwingConstants.CENTER);
-        lblEstado.setFont(new Font("SansSerif", Font.BOLD, 13));
-        lblEstado.setBorder(BorderFactory.createEmptyBorder(8, 10, 12, 10));
-
-        //estado incial fake
-        lblEstado.setForeground(new Color(245,185,11));
-
-        //cont3enedor de botones
-        JPanel panelBotones = ComponentesGraficos.crearPanelBotones(btnGuardar,btnEditar,btnEliminar,btnBuscar,btnLimpiar);
-
+        contenedor.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         contenedor.add(filaForm);
         contenedor.add(Box.createVerticalStrut(15));
         contenedor.add(panelBotones);
+
         setLayout(new BorderLayout());
         add(contenedor, BorderLayout.NORTH);
         add(scrollTabla, BorderLayout.CENTER);
-        add(lblEstado,BorderLayout.SOUTH);
-        // En tu método incializarComponente()
-
+        add(ComponentesGraficos.crearPanelEstado(lblEstado), BorderLayout.SOUTH);
     }
 
     public JTextField getTxtNombre() { return name; }
