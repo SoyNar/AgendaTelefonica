@@ -3,13 +3,13 @@ package com.hackathon.agenda.modelo;
 public class Contacto {
     private String nombre;
     private String apellido;
-    private String numero;
+    private String telefono;
 
     //constructor
-    public Contacto(String apellido, String numero, String nombre) {
-        this.apellido = apellido;
-        this.numero = numero;
+    public Contacto(String nombre, String apellido, String telefono) {
         this.nombre = nombre;
+        this.apellido = apellido;
+        this.telefono = telefono;
     }
 
     //getters y setters
@@ -29,11 +29,11 @@ public class Contacto {
         this.apellido = apellido;
     }
 
-    public String getNumero() {
-        return numero;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 }
