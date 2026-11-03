@@ -17,10 +17,12 @@ public class Contacto {
         if (esTelefonoValido(telefono)!=true){
             throw new IllegalArgumentException("El Telefono no es válido");
 
+        }else {
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.telefono = telefono;
         }
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.telefono = telefono;
+
     }
 
     //getters y setters
@@ -75,7 +77,7 @@ public class Contacto {
         }
     //metodo validar si telefono es valido
     public static boolean esTelefonoValido(String telefono){
-        String reglaTel= "\\d{9}";
+        String reglaTel= "(\\+\\d{1,2} )?\\d{9}";
 
         if(telefono ==null){
             return false;
