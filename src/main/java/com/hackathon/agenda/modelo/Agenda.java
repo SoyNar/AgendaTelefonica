@@ -65,7 +65,7 @@ public class Agenda {
         return false;
     }
 
-    // 4. Si pasa las validaciones, lo añade a la lista
+    // Si pasa las validaciones, lo añade a la lista
     public List<Contacto> listarContactos() {
         List<Contacto> ordenados = new ArrayList<>(contactos);
         ordenados.sort((c1, c2) -> {
