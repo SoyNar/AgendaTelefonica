@@ -3,6 +3,7 @@ package com.hackathon.agenda.vista;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.sql.Time;
 
 /**
  * Esta clase es una fabria de componentes reusables de swing
@@ -24,7 +25,9 @@ public final class ComponentesGraficos {
      * @return campo de texto listo  para usarse en el formulario
      * * */
     public  static JTextField crearCampoTexto(int columnas){
-        return  new JTextField(columnas);
+        JTextField campo = new JTextField(columnas);
+        campo.putClientProperty("JTextField.placeholderText", "Escribe aquí");
+        return campo;
     }
 
     /**
@@ -132,6 +135,9 @@ public final class ComponentesGraficos {
         JTable tabla = new JTable(modelo);
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabla.setFillsViewportHeight(true);
+        tabla.setRowHeight(32);
+        tabla.setShowHorizontalLines(false);
+        tabla.getTableHeader().setReorderingAllowed(false);
         return  tabla;
     }
 
@@ -158,6 +164,25 @@ public final class ComponentesGraficos {
     public static void mostrarMensaje(JLabel etiqueta, String texto, Color color){
         etiqueta.setForeground(color);
         etiqueta.setText(texto);
+        Timer t = new Timer(3000,e -> etiqueta.setText(""));
+        t.start();
+    }
+
+    /**
+     *metodo para crear boton con estilo pripio
+     * */
+    public static JButton creatBotonPrimario(String texto){
+        JButton boton = new JButton(texto);
+        boton.putClientProperty("FlatLaf.style",
+                "background: #6c8cff; foreground: #ffffff; arc: 12");
+        return boton;
+    }
+
+    public static JButton creatBotonPeligro(String texto){
+        JButton boton = new JButton(texto);
+        boton.putClientProperty("FlatLaf.style",
+                "foreground: #ef5b5b; borderColor: #ef5b5b; arc: 12");
+        return boton;
     }
 
 }
