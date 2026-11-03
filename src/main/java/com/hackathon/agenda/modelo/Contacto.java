@@ -10,7 +10,7 @@ public class Contacto {
     //constructor
     public Contacto(String nombre, String apellido, String telefono) {
         if(esDatoValido(nombre)!=true){
-            throw new IllegalArgumentException("El Nomrbe no es válido");
+            throw new IllegalArgumentException("El Nombre no es válido");
         }
         if(esDatoValido(apellido)!=true){
             throw new IllegalArgumentException("El Apellido no es válido");
@@ -20,8 +20,8 @@ public class Contacto {
             throw new IllegalArgumentException("El Telefono no es válido");
 
         }
-        this.nombre = nombre;
-        this.apellido = apellido;
+        this.nombre = nombre.trim();
+        this.apellido = apellido.trim();
         this.telefono = telefono;
     }
 
@@ -32,9 +32,9 @@ public class Contacto {
 
     public void setNombre(String nombre) {
         if(esDatoValido(nombre)!=true){
-            throw new IllegalArgumentException("El Nomrbe no es válido");
+            throw new IllegalArgumentException("El Nombre no es válido");
         }else {
-            this.nombre = nombre;
+            this.nombre = nombre.trim();
         }
 
     }
@@ -48,7 +48,7 @@ public class Contacto {
             throw new IllegalArgumentException("El Apellido no es válido");
 
         }else{
-            this.apellido = apellido;
+            this.apellido = apellido.trim();
 
         }
     }
@@ -110,8 +110,5 @@ public class Contacto {
     public int hashCode(){
         return Objects.hash(nombre.toLowerCase(), apellido.toLowerCase());
     }
-
-
-
 
 }
