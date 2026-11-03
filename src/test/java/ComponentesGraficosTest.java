@@ -14,7 +14,7 @@ public class ComponentesGraficosTest {
     @Test
     @DisplayName("crearCampoTexto debe retornar un JTextField configurado con las columnas indicadas")
     void testCrearCampoTexto() {
-        JTextField campo = ComponentesGraficos.crearCampoTexto(15);
+        JTextField campo = ComponentesGraficos.crearCampoTexto(15,"Aqui");
 
         assertNotNull(campo, "El campo de texto no debe ser nulo");
         assertEquals(15, campo.getColumns(), "El número de columnas asignado debe ser 15");

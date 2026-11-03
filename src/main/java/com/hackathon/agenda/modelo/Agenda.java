@@ -28,41 +28,25 @@ public class Agenda {
 
     // Añadir contacto a la agenda
     // Añadir contacto a la agenda
-    public void anadirContacto(Contacto c) {
+    public void añadirContacto(Contacto c) {
         if (c == null) {
             throw new IllegalArgumentException("El campo no puede estar vacío");
         }
         if (agendaLlena()) {
             throw new IllegalStateException("La agenda está llena, no puede agregar más contactos");
         }
-
-        String claveNueva = generarClave(c);
-
-        for (int i = 0; i < contactos.size(); i++) {
-            Contacto existente = contactos.get(i);
-            String claveExistente = generarClave(existente);
-
-            if (claveExistente.equals(claveNueva)) {
-                throw new IllegalArgumentException(
-                        "El contacto ya existe en la posición " + (i + 1) + ": "
-                                + existente.getNombre() + " " + existente.getApellido());
-            }
+        if(existeContacto(c)){
+            throw new IllegalArgumentException("El contacto ya existe en la agenda");
         }
 
         contactos.add(c);
     }
 
     public boolean existeContacto(Contacto c) {
-        if (c == null) {
+        if(c == null){
             return false;
         }
-        String clave = generarClave(c);
-        for (Contacto existente : contactos) {
-            if (generarClave(existente).equals(clave)) {
-                return true;
-            }
-        }
-        return false;
+        return contactos.contains(c);
     }
 
     // Si pasa las validaciones, lo añade a la lista
@@ -83,10 +67,8 @@ public class Agenda {
             throw new IllegalArgumentException("Campos obligatorios");
         }
 
-        String claveBuscada = (nombre.trim() + apellido.trim()).toLowerCase();
-
         for (Contacto existente : contactos) {
-            if (generarClave(existente).equals(claveBuscada)) {
+            if (existente.getNombre().equalsIgnoreCase(nombre.trim()) && existente.getApellido().equalsIgnoreCase(apellido.trim())) {
                 return existente.getTelefono();
             }
         }
@@ -99,16 +81,7 @@ public class Agenda {
             throw new IllegalArgumentException("Contacto no nulo");
         }
 
-        String claveAEliminar = generarClave(c);
-
-        for (int i = 0; i < contactos.size(); i++) {
-            if (generarClave(contactos.get(i)).equals(claveAEliminar)) {
-                contactos.remove(i);
-                return true;
-            }
-        }
-
-        return false;
+        return contactos.remove(c);
     }
 
     public boolean modificarTelefono(String nombre, String apellido, String nuevoTelefono) {
@@ -120,10 +93,8 @@ public class Agenda {
             throw new IllegalArgumentException("Formato inválido");
         }
 
-        String claveBuscada = (nombre.trim() + apellido.trim()).toLowerCase();
-
         for (Contacto existente : contactos) {
-            if (generarClave(existente).equals(claveBuscada)) {
+            if (existente.getNombre().equalsIgnoreCase(nombre.trim()) && existente.getApellido().equalsIgnoreCase(apellido.trim())) {
                 existente.setTelefono(nuevoTelefono);
                 return true;
             }
@@ -146,12 +117,5 @@ public class Agenda {
 
     public int getCantidadContactos() {
         return contactos.size();
-    }
-
-    // Normaliza clave de comparación
-    // Método auxiliar privado para no repetir la lógica de concatenar y pasar a
-    // minúscula
-    private String generarClave(Contacto c) {
-        return (c.getNombre().trim() + c.getApellido().trim()).toLowerCase();
     }
 }

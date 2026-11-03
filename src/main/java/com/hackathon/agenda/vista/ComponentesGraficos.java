@@ -24,9 +24,10 @@ public final class ComponentesGraficos {
      * @param columnas ancho aproximado  del campo, en caracteres
      * @return campo de texto listo  para usarse en el formulario
      * * */
-    public  static JTextField crearCampoTexto(int columnas){
+    public  static JTextField crearCampoTexto(int columnas,String texto){
         JTextField campo = new JTextField(columnas);
-        campo.putClientProperty("JTextField.placeholderText", "Escribe aquí");
+        campo.putClientProperty("JTextField.placeholderText", texto);
+        campo.putClientProperty("JTextField.showClearButton", true);
         return campo;
     }
 
@@ -39,8 +40,11 @@ public final class ComponentesGraficos {
      * */
 
     public static JPanel crearComponenteFila(String etiqueta, JComponent campo){
-        JPanel bloque = new JPanel(new BorderLayout(0,3));
-        bloque.add(new JLabel(etiqueta),BorderLayout.NORTH);
+        JPanel bloque = new JPanel(new BorderLayout(0,5));
+        JLabel lbl = new JLabel(etiqueta);
+        lbl.setFont(new Font("Sanserif", Font.BOLD,12));
+        lbl.putClientProperty("FlatLaf.style", "foreground: #a0a5b5;");
+        bloque.add(lbl,BorderLayout.NORTH);
         bloque.add(campo,BorderLayout.CENTER);
         return  bloque;
     }
@@ -183,6 +187,52 @@ public final class ComponentesGraficos {
         boton.putClientProperty("FlatLaf.style",
                 "foreground: #ef5b5b; borderColor: #ef5b5b; arc: 12");
         return boton;
+    }
+
+    /**
+     * Crea una etiqueta de título destacada usando las clases de estilo de FlatLaf.
+     *
+     * @param texto texto del título
+     * @return JLabel estilizado como título principal
+     */
+    public static JLabel crearTituloSeccion(String texto) {
+        JLabel titulo = new JLabel(texto);
+        // Aplica estilo H2, negrita y color primario/acento
+        titulo.putClientProperty("FlatLaf.styleClass", "h2");
+        titulo.putClientProperty("FlatLaf.style", "font: bold +2; foreground: $Component.accentColor;");
+        return titulo;
+    }
+
+    public static JPanel crearEncabezado(String titulo, String subtitulo) {
+        JPanel panel = new JPanel(new BorderLayout(0, 4));
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 5, 15, 5));
+
+        JLabel lblTitulo = new JLabel(titulo);
+        lblTitulo.putClientProperty("FlatLaf.styleClass", "h1");
+        lblTitulo.putClientProperty("FlatLaf.style", "font: bold +4; foreground: #ffffff;");
+
+        JLabel lblSubtitulo = new JLabel(subtitulo);
+        lblSubtitulo.putClientProperty("FlatLaf.style", "foreground: #8a8f9e; font: -1;");
+
+        panel.add(lblTitulo, BorderLayout.NORTH);
+        panel.add(lblSubtitulo, BorderLayout.SOUTH);
+        return panel;
+    }
+    /**
+     * Muestra u oculta un estado de carga en la tabla.
+     *
+     * @param tabla tabla a modificar
+     * @param cargando true para mostrar estado de carga, false para restaurar
+     */
+    public static void mostrarEstadoCargaTabla(JTable tabla, boolean cargando) {
+        if (cargando) {
+            tabla.setEnabled(false);
+            DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+            modelo.setRowCount(0); // Limpiar datos actuales
+            modelo.addRow(new Object[]{"Cargando...", "Cargando...", "Cargando..."});
+        } else {
+            tabla.setEnabled(true);
+        }
     }
 
 }
