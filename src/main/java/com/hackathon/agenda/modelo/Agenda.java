@@ -52,20 +52,6 @@ public class Agenda {
         contactos.add(c);
     }
 
-    // PEGAR AQUÍ EL NUEVO MÉTODO:
-    public boolean existeContacto(Contacto c) {
-        if (c == null) {
-            return false;
-        }
-        String clave = generarClave(c);
-        for (Contacto existente : contactos) {
-            if (generarClave(existente).equals(clave)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     // 4. Si pasa las validaciones, lo añade a la lista
     public List<Contacto> listarContactos() {
         List<Contacto> ordenados = new ArrayList<>(contactos);
